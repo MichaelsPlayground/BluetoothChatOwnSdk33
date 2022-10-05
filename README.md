@@ -4,12 +4,9 @@ Android BluetoothChat Sample
 
 Original source: https://github.com/android/connectivity-samples
 
-Please note: the app runs with "compileSdkVersion 29" and "targetSdkVersion 29", if you 
-update to SDK 32/Android 12 you need to set some other AndroidManifest-permissions 
-AND a live permission check. I tested it but as the connectivity is running in 
-"BluetoothChatService" there is no context available in this class. I'm actually not 
-been able to find a solution for that, sorry. So my recommendation for now is: do not update 
-the program.
+Please note: this is the updated version of the original app that was "compileSdkVersion 29" and 
+"targetSdkVersion 29". This app is compiled with SDK 32/Android 12  and you need to set some other 
+AndroidManifest-permissions AND a live permission check. I tested the successfully.
 
 This sample shows how to implement two-way text chat over Bluetooth between two Android devices, using
 all the fundamental Bluetooth API capabilities.

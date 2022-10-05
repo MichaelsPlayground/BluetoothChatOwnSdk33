@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/BluetoothChat.iml" filepath="$PROJECT_DIR$/.idea/modules/BluetoothChat.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Application/BluetoothChat.Application.iml" filepath="$PROJECT_DIR$/.idea/modules/Application/BluetoothChat.Application.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Application/BluetoothChat.Application.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/Application/BluetoothChat.Application.androidTest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Application/BluetoothChat.Application.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Application/BluetoothChat.Application.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Application/BluetoothChat.Application.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/Application/BluetoothChat.Application.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/BluetoothChatOwnSdk32.iml" filepath="$PROJECT_DIR$/.idea/modules/BluetoothChatOwnSdk32.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Application/BluetoothChatOwnSdk32.Application.iml" filepath="$PROJECT_DIR$/.idea/modules/Application/BluetoothChatOwnSdk32.Application.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Application/BluetoothChatOwnSdk32.Application.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/Application/BluetoothChatOwnSdk32.Application.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Application/BluetoothChatOwnSdk32.Application.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Application/BluetoothChatOwnSdk32.Application.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Application/BluetoothChatOwnSdk32.Application.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/Application/BluetoothChatOwnSdk32.Application.unitTest.iml" />
     </modules>
   </component>
 </project>

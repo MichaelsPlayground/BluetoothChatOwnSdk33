@@ -427,13 +427,14 @@ public class BluetoothChatService {
                 return;
             }
             mmDevice = device;
+
             BluetoothSocket tmp = null;
             mSocketType = secure ? "Secure" : "Insecure";
 
             // Get a BluetoothSocket for a connection with the
             // given BluetoothDevice
             try {
-                                if (secure) {
+                if (secure) {
 
                     tmp = device.createRfcommSocketToServiceRecord(
                             MY_UUID_SECURE);

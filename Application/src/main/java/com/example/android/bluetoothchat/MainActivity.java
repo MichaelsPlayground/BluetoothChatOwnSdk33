@@ -18,12 +18,15 @@
 package com.example.android.bluetoothchat;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ViewAnimator;
 
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -41,6 +44,7 @@ import com.example.android.common.logger.MessageOnlyLogFilter;
  * For devices with displays with a width of 720dp or greater, the sample log is always visible,
  * on other devices it's visibility is controlled by an item on the Action Bar.
  */
+@RequiresApi(api = Build.VERSION_CODES.S)
 public class MainActivity extends SampleActivityBase {
 
     public static final String TAG = "MainActivity";
@@ -48,10 +52,36 @@ public class MainActivity extends SampleActivityBase {
     // Whether the Log Fragment is currently shown
     private boolean mLogShown;
 
+    /**
+     * This block is for requesting permissions on Android 12+
+     * @param savedInstanceState
+     */
+
+    private static final int PERMISSIONS_REQUEST_CODE = 191;
+    private static final String[] BLE_PERMISSIONS = new String[]{
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+    };
+
+    private static final String[] ANDROID_12_BLE_PERMISSIONS = new String[]{
+            Manifest.permission.BLUETOOTH_SCAN,
+            Manifest.permission.BLUETOOTH_CONNECT,
+            Manifest.permission.ACCESS_FINE_LOCATION
+    };
+
+    public static void requestBlePermissions(Activity activity, int requestCode) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
+            ActivityCompat.requestPermissions(activity, ANDROID_12_BLE_PERMISSIONS, requestCode);
+        else
+            ActivityCompat.requestPermissions(activity, BLE_PERMISSIONS, requestCode);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        requestBlePermissions(this, PERMISSIONS_REQUEST_CODE);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling ActivityCompat#requestPermissions

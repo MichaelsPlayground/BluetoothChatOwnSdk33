@@ -17,6 +17,7 @@
 package com.example.android.bluetoothchat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -201,16 +202,8 @@ public class BluetoothChatFragment extends Fragment {
     /**
      * Makes this device discoverable for 300 seconds (5 minutes).
      */
+    @SuppressLint("MissingPermission")
     private void ensureDiscoverable() {
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
         if (mBluetoothAdapter.getScanMode() !=
                 BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE) {
             Intent discoverableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
@@ -295,6 +288,7 @@ public class BluetoothChatFragment extends Fragment {
     /**
      * The Handler that gets information back from the BluetoothChatService
      */
+    @SuppressLint("HandlerLeak")
     private final Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {

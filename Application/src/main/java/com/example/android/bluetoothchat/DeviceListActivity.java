@@ -17,6 +17,7 @@
 package com.example.android.bluetoothchat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -68,6 +69,7 @@ public class DeviceListActivity extends Activity {
      */
     private ArrayAdapter<String> mNewDevicesArrayAdapter;
 
+    @SuppressLint("MissingPermission")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,17 +117,7 @@ public class DeviceListActivity extends Activity {
         // Get the local Bluetooth adapter
         mBtAdapter = BluetoothAdapter.getDefaultAdapter();
 
-        // Get a set of currently paired devices
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        Set<BluetoothDevice> pairedDevices = mBtAdapter.getBondedDevices();
+        @SuppressLint("MissingPermission") Set<BluetoothDevice> pairedDevices = mBtAdapter.getBondedDevices();
 
         // If there are paired devices, add each one to the ArrayAdapter
         if (pairedDevices.size() > 0) {
@@ -139,20 +131,12 @@ public class DeviceListActivity extends Activity {
         }
     }
 
+    @SuppressLint("MissingPermission")
     @Override
     protected void onDestroy() {
         super.onDestroy();
 
         if (mBtAdapter != null) {
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return;
-            }
             // Make sure we're not doing discovery anymore
             mBtAdapter.cancelDiscovery();
         }
@@ -164,18 +148,9 @@ public class DeviceListActivity extends Activity {
     /**
      * Start device discover with the BluetoothAdapter
      */
+    @SuppressLint("MissingPermission")
     private void doDiscovery() {
         Log.d(TAG, "doDiscovery()");
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
 
         // Indicate scanning in the title
         setProgressBarIndeterminateVisibility(true);
@@ -198,17 +173,9 @@ public class DeviceListActivity extends Activity {
      */
     private AdapterView.OnItemClickListener mDeviceClickListener
             = new AdapterView.OnItemClickListener() {
+        @SuppressLint("MissingPermission")
         public void onItemClick(AdapterView<?> av, View v, int arg2, long arg3) {
 
-            if (ActivityCompat.checkSelfPermission(v.getContext(), Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return;
-            }
             // Cancel discovery because it's costly and we're about to connect
             mBtAdapter.cancelDiscovery();
 
@@ -231,22 +198,13 @@ public class DeviceListActivity extends Activity {
      * discovery is finished
      */
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @SuppressLint("MissingPermission")
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
 
             // When discovery finds a device
             if (BluetoothDevice.ACTION_FOUND.equals(action)) {
-                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
-                    return;
-                }
-
                 // Get the BluetoothDevice object from the Intent
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 // If it's already paired, skip it, because it's been listed already

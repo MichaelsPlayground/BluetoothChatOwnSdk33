@@ -17,6 +17,7 @@
 package com.example.android.bluetoothchat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothServerSocket;
@@ -174,6 +175,7 @@ public class BluetoothChatService {
      * @param socket The BluetoothSocket on which the connection was made
      * @param device The BluetoothDevice that has been connected
      */
+    @SuppressLint("MissingPermission")
     public synchronized void connected(BluetoothSocket socket, BluetoothDevice
             device, final String socketType) {
         Log.d(TAG, "connected, Socket Type:" + socketType);
@@ -207,15 +209,6 @@ public class BluetoothChatService {
         // Send the name of the connected device back to the UI Activity
         Message msg = mHandler.obtainMessage(Constants.MESSAGE_DEVICE_NAME);
         Bundle bundle = new Bundle();
-        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
         bundle.putString(Constants.DEVICE_NAME, device.getName());
         msg.setData(bundle);
         mHandler.sendMessage(msg);
@@ -319,16 +312,8 @@ public class BluetoothChatService {
         private BluetoothServerSocket mmServerSocket;
         private String mSocketType;
 
+        @SuppressLint("MissingPermission")
         public AcceptThread(boolean secure) {
-            if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return;
-            }
             BluetoothServerSocket tmp = null;
             mSocketType = secure ? "Secure" : "Insecure";
 
@@ -416,16 +401,8 @@ public class BluetoothChatService {
         private BluetoothDevice mmDevice;
         private String mSocketType;
 
+        @SuppressLint("MissingPermission")
         public ConnectThread(BluetoothDevice device, boolean secure) {
-            if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return;
-            }
             mmDevice = device;
 
             BluetoothSocket tmp = null;
@@ -449,19 +426,10 @@ public class BluetoothChatService {
             mState = STATE_CONNECTING;
         }
 
+        @SuppressLint("MissingPermission")
         public void run() {
             Log.i(TAG, "BEGIN mConnectThread SocketType:" + mSocketType);
             setName("ConnectThread" + mSocketType);
-
-            if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return;
-            }
 
             // Always cancel discovery because it will slow down a connection
 

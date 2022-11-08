@@ -8,7 +8,7 @@ Bluetooth Chat (Java) Example: https://github.com/android/connectivity-samples/t
 
 Please note: this is the updated version of the original app that was "compileSdkVersion 29" and 
 "targetSdkVersion 29". This app is compiled with SDK 32/Android 12  and you need to set some other 
-AndroidManifest-permissions AND a live permission check. I tested the successfully.
+AndroidManifest-permissions AND a runtime permission check. I tested the successfully.
 
 This sample shows how to implement two-way text chat over Bluetooth between two Android devices, using
 all the fundamental Bluetooth API capabilities.

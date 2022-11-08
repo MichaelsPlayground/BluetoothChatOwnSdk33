@@ -4,6 +4,8 @@ Android BluetoothChat Sample
 
 Original source: https://github.com/android/connectivity-samples
 
+Bluetooth Chat (Java) Example: https://github.com/android/connectivity-samples/tree/main/BluetoothChat
+
 Please note: this is the updated version of the original app that was "compileSdkVersion 29" and 
 "targetSdkVersion 29". This app is compiled with SDK 32/Android 12  and you need to set some other 
 AndroidManifest-permissions AND a live permission check. I tested the successfully.
